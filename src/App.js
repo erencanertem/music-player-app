@@ -41,8 +41,11 @@ function App() {
     });
   };
 
-  const songEndHandler = () => {
-    setIsPlaying(false);
+  const songEndHandler = async () => {
+    let currentIndex = songs.findIndex((song) => song.id === currentSong.id);
+    await setCurrentSong(songs[(currentIndex + 1) % songs.length]);
+    playAudio(isPlaying, audioRef);
+    return;
   };
 
   return (
